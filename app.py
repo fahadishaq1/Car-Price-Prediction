@@ -20,13 +20,9 @@ def predict():
     # round the price value
     car_price = round(car_price[0])
     
-    return render_template('index.html', prediction_text=f'The price of the 
-                            {car_details[0].capitalize()} 
-                            {car_details[1]} {car_details[3]} 
-                            model grade {car_details[5]} {car_details[4]}, 
-                            {car_details[6]} car with mileage value of 
-                            {car_details[2]}km should be {car_price:,} naira')
+    return render_template('index.html', prediction_text=f'The price of {car_details[4]} {car_details[9]} {car_details[8]} {car_details[7]} {car_details[0]} 
+                                        {car_details[5].capitalize()} {car_details[6].capitalize()} {car_details[1]} {car_details[3]} {car_details[10]
+                                        with a mileage of {car_details[2]}km should be {car_price:,} Polish zloty')
    
-
 if __name__ == '__main__':
     app.run(debug=True)
