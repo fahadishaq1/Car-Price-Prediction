@@ -12,6 +12,7 @@
   <link rel="stylesheet" type='text/css' href="{{ url_for('static', filename='css/style.css') }}">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+
   <title>Used Cars ML API</title>
 </head>
 
@@ -24,74 +25,101 @@
         <!-- Main Input For Receiving Query to our ML -->
         <form action="{{ url_for('predict')}}" method="post">
           <div class="form-group">
-            <label for="manufacturer">Choose a Car Brand/Manufacturer</label>
-
+            <label for="manufacturer">Car Brand/Manufacturer</label>
+            <!-- Only Car Brands that have more than 10 data points -->
             <select name="manufacturers" id="manufacturer" onchange="filterList(this)" required="required">
               <option value="">--Select an option--</option>
+              <option value="abarth">Abarth</option>
               <option value="acura">Acura</option>
+              <option value="aixam">Aixam</option>
+              <option value="alfa romeo">Alpha Romeo</option>
+              <option value="aston martin">Aston Martin</option>
               <option value="audi">Audi</option>
+              <option value="bentley">Bentley</option>
               <option value="bmw">BMW</option>
+              <option value="buick">Buick</option>
               <option value="cadillac">Cadillac</option>
-              <option value="chery">Chery</option>
               <option value="chevrolet">Chevrolet</option>
               <option value="chrysler">Chrysler</option>
-              <option value="citroen">Citroen</option>
+              <option value="citroën">Citroën</option>
+              <option value="cupra">Cupra</option>
+              <option value="dacia">Dacia</option>
+              <option value="daewoo">Daewoo</option>
+              <option value="daihatsu">Daihatsu</option>
               <option value="dodge">Dodge</option>
+              <option value="ds automobiles">DS Automobiles</option>
+              <option value="ferrari">Ferrari</option>
               <option value="fiat">Fiat</option>
               <option value="ford">Ford</option>
-              <option value="foton">Foton</option>
-              <option value="gac">Gac</option>
               <option value="gmc">GMC</option>
               <option value="honda">Honda</option>
               <option value="hummer">Hummer</option>
               <option value="hyundai">Hyundai</option>
               <option value="infiniti">Infiniti</option>
-              <option value="innoson">Innoson</option>
               <option value="isuzu">Isuzu</option>
               <option value="jaguar">Jaguar</option>
               <option value="jeep">Jeep</option>
               <option value="kia">Kia</option>
+              <option value="lada">Lada</option>
+              <option value="lamborghini">Lamborghini</option>
+              <option value="lancia">Lancia</option>
               <option value="land rover">Land Rover</option>
               <option value="lexus">Lexus</option>
+              <option value="ligier">Ligier</option>
               <option value="lincoln">Lincoln</option>
               <option value="mazda">Mazda</option>
+              <option value="maserati">Maserati</option>
+              <option value="mclaren">Mclaren</option>
               <option value="mercedes-benz">Mercedes-Benz</option>
-              <option value="mercury">Mercury</option>
               <option value="mg">MG</option>
+              <option value="microcar">Microcar</option>
               <option value="mini">Mini</option>
               <option value="mitsubishi">Mitsubishi</option>
               <option value="nissan">Nissan</option>
+              <option value="oldsmobile">Oldsmobile</option>
               <option value="opel">Opel</option>
               <option value="peugeot">Peugeot</option>
+              <option value="polonez">Polonez</option>
               <option value="pontiac">Pontiac</option>
               <option value="porsche">Porsche</option>
+              <option value="ram">Ram</option>
               <option value="renault">Renault</option>
-              <option value="saturn">Saturn</option>
+              <option value="rolls-royce">Rolls-Royce</option>0
+              <option value="rover">Rover</option>
+              <option value="saab">Saab</option>
+              <option value="seat">Seat</option>
               <option value="skoda">Skoda</option>
+              <option value="smart">Smart</option>
               <option value="ssangyong">Ssangyong</option>
               <option value="subaru">Subaru</option>
               <option value="suzuki">Suzuki</option>
-              <option value="tata">Tata</option>
               <option value="toyota">Toyota</option>
               <option value="volkswagen">Volkswagen</option>
               <option value="volvo">Volvo</option>
             </select>
           </div>
+
           <div class="form-group">
-            <label for="model">Choose a Car Model</label>
+            <label for="model">Car Model</label>
             <select name='models' id="model" required="required">
             </select>
           </div>
-
+          
           <div class="form-group">
             <label for="mileage">Type the Mileage Value</label>
-            <input type="number" name="mileage_value" id='mileage' placeholder="Mileage(km)" required="required" />
+            <input type="number" name="mileage_value" id='mileage' placeholder="Mileage[km]" required="required" />
           </div>
 
           <div class="form-group">
-            <label for="year">Choose a Year</label>
+            <label for="year">Year of Production</label>
             <input name="year_value" id='year' list="years" placeholder="--Select an option--" required="required">
             <datalist id="years">
+              <option value="1984">
+              <option value="1985">
+              <option value="1986">
+              <option value="1987">
+              <option value="1988">
+              <option value="1989">
               <option value="1990">
               <option value="1991">
               <option value="1992">
@@ -127,31 +155,69 @@
           </div>
 
           <div class="form-group">
-            <label for="sell_cond">Choose the Car Selling Condition</label>
-
+            <label for="sell_cond">Car Selling Condition</label>
             <select name="selling_condition" id="sell_cond" required="required">
               <option value="">--Select an option--</option>
-              <option value="nigerian used">Nigerian used</option>
-              <option value="foreign used">Foreign used</option>
+              <option value="new">New</option>
+              <option value="used">Used</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label for="grade">Choose the Car Grade</label>
+            <label for="power">Type the Power Value</label>
+            <input type="number" name="power_value" id='power' placeholder="Power[hp]" required="required" />
+          </div>
 
-            <select name="grades" id="grade" required="required">
+          <div class="form-group">
+            <label for="displacement">Type the Displacement Value</label>
+            <input type="number" name="displacement_value" id='displacement' placeholder="Displacement[cm3]" required="required" />
+          </div>
+
+
+          <div class="form-group">
+            <label for="type">Car Type</label>
+            <select name="car_type" id="type" required="required">
               <option value="">--Select an option--</option>
-              <option value="b">B</option>
-              <option value="c">C</option>
-              <option value="d">D</option>
-              <option value="e">E</option>
+              <option value="station_wagon">Station Wagon</option>
+              <option value="sedan">Sedan</option>
+              <option value="compact">Compact</option>
+              <option value="city_cars">City Cars</option>
+              <option value="minivan">Minivan</option>
+              <option value="coupe">Coupe</option>
+              <option value="small_cars">Small Cars</option>
+              <option value="convertible">Convertible</option>
             </select>
           </div>
 
           <div class="form-group">
-            <label for="transmission">Choose the Car Transmission</label>
+            <label for="drive">Drive Type</label>
+            <select name="drive_type" id="drive" required="required">
+              <option value="">--Select an option--</option>
+              <option value="front wheels">Front Wheels</option>
+              <option value="rear wheels">Rear Wheels</option>
+              <option value="4x4 (permanent)">4x4 (Permanent)</option>
+              <option value="4x4 (attached automatically)">4x4 (Attached Automatically)</option>
+              <option value="4x4 (attached manually)">4x4 (Attached Manually)</option>
+            </select>
+          </div>
 
-            <select name="transmissions" id="transmission" required="required">
+
+          <div class="form-group">
+            <label for="fuel">Fuel Type</label>
+            <select name="fuel_type" id="fuel" required="required">
+              <option value="">--Select an option--</option>
+              <option value="gasoline">Gasoline</option>
+              <option value="diesel">Diesel</option>
+              <option value="gasoline + lpg">Gasoline + LPG</option>
+              <option value="hybrid">Hybrid</option>
+              <option value="gasoline + cng">Gasoline + CNG</option>
+            </select>
+          </div>
+
+
+          <div class="form-group">
+            <label for="transmission">Transmission Type</label>
+            <select name="transmission_type" id="transmission" required="required">
               <option value="">--Select an option--</option>
               <option value="automatic">Automatic</option>
               <option value="manual">Manual</option>
